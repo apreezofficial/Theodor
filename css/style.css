@@ -4,7 +4,9 @@
     --light: #F1F8FF;
     --dark: #0F172B;
 }
-
+.navbar{
+    position: fixed;
+}
 .ff-secondary {
     font-family: 'Pacifico', cursive;
 }
