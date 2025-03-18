@@ -6,6 +6,8 @@
 }
 .navbar{
     position: fixed;
+    width:100%;
+    z-index: 989999999999;
 }
 .ff-secondary {
     font-family: 'Pacifico', cursive;
