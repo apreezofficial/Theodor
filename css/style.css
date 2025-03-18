@@ -83,7 +83,7 @@
 
 /*** Navbar ***/
 .navbar-dark .navbar-nav .nav-link {
-    position: relative;
+    position: fixed;
     margin-left: 25px;
     padding: 35px 0;
     font-size: 15px;
