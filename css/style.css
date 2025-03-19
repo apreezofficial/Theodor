@@ -1,4 +1,3 @@
-/********** Template CSS **********/
 :root {
     --primary: #FEA116;
     --light: #F1F8FF;
@@ -87,7 +86,7 @@
 
 /*** Navbar ***/
 .navbar-dark .navbar-nav .nav-link {
-    position: fixed;
+    position: relative;
     margin-left: 25px;
     padding: 35px 0;
     font-size: 15px;
@@ -118,7 +117,7 @@
 
 @media (max-width: 991.98px) {
     .sticky-top.navbar-dark {
-        position: fixed;
+        position: relative;
     }
 
     .navbar-dark .navbar-collapse {
@@ -139,7 +138,7 @@
 
 @media (min-width: 992px) {
     .navbar-dark {
-        position: fixed;
+        position: absolute;
         width: 100%;
         top: 0;
         left: 0;
