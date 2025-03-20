@@ -118,7 +118,7 @@
     max-height: 45px;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 700px) {
     .sticky-top.navbar-dark {
         position: relative;
     }
@@ -139,7 +139,7 @@
     }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 701px) {
     .navbar-dark {
         position: absolute;
         width: 100%;
