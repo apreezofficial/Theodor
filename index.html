@@ -578,24 +578,20 @@
 
 <script>
 document.getElementById("orderForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Stop the form from reloading
+    event.preventDefault(); // Prevent page reload
 
     const formData = new FormData(this);
 
-    fetch("https://submit-form.com/fcZCjgFXg", {
-        method: "POST",
-        body: formData,
-        headers: {
-            "Accept": "application/json" // Tells Formspark we expect a response
-        }
-    })
-    .then(response => {
-        console.log("Response Status:", response.status); // Log status code
-        return response.text(); // Get raw text response
-    })
-    .then(data => {
-        console.log("Formspark Response:", data); // Debug the response
+    // Add StaticForms.io access key
+    formData.append("accessKey", "5ea91d54-57d8-4fc5-ad26-ff84eaddea33");
 
+    fetch("https://api.staticforms.xyz/submit", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.text()) // Convert response to text
+    .then(data => {
+        console.log("StaticForms Response:", data); // Debugging purpose
         document.getElementById("responseMessage").innerHTML = 
             "<p style='color: green;'>Order placed successfully!</p>";
         document.getElementById("responseMessage").style.display = "block";
@@ -608,7 +604,7 @@ document.getElementById("orderForm").addEventListener("submit", function(event) 
         document.getElementById("responseMessage").style.display = "block";
     });
 });
-</script>     </div>
+</script></div>
                 </div>
             </div>
         </div>
