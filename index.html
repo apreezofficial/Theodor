@@ -536,7 +536,7 @@
                     <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
                         <h5 class="section-title ff-secondary text-start text-primary fw-normal">Reservation</h5>
                         <h1 class="text-white mb-4">Order Online</h1>
-         <form id="orderForm">
+       <form id="orderForm">
     <div class="row g-3">
         <div class="col-12">
             <div class="form-floating">
@@ -582,7 +582,7 @@ document.getElementById("orderForm").addEventListener("submit", function(event) 
 
     const formData = new FormData(this);
 
-    fetch("https://formkeep.com/f/352ec390510e", {
+    fetch("https://formspree.io/f/xoveqzgq", {
         method: "POST",
         body: formData,
         headers: {
@@ -613,8 +613,7 @@ function showMessage(text, color) {
         responseMessage.style.display = "none";
     }, 3000); // Hide after 3 seconds
 }
-</script>
-                    </div>
+</script>                    </div>
                 </div>
             </div>
         </div>
