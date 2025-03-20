@@ -75,7 +75,9 @@
 
 .btn-square,
 .btn-sm-square,
-.btn-lg-square {
+.btn-lg-square,
+.readmore
+{
     padding: 0;
     display: flex;
     align-items: center;
