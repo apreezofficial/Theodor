@@ -578,7 +578,7 @@
 
 <script>
 document.getElementById("orderForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent page reload
+    event.preventDefault(); // Stop the form from reloading
 
     const formData = new FormData(this);
 
@@ -586,17 +586,16 @@ document.getElementById("orderForm").addEventListener("submit", function(event) 
         method: "POST",
         body: formData,
         headers: {
-            "Accept": "application/json" // Ensures Formspark responds properly
+            "Accept": "application/json" // Tells Formspark we expect a response
         }
     })
     .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error("Form submission failed.");
-        }
+        console.log("Response Status:", response.status); // Log status code
+        return response.text(); // Get raw text response
     })
     .then(data => {
+        console.log("Formspark Response:", data); // Debug the response
+
         document.getElementById("responseMessage").innerHTML = 
             "<p style='color: green;'>Order placed successfully!</p>";
         document.getElementById("responseMessage").style.display = "block";
@@ -609,8 +608,7 @@ document.getElementById("orderForm").addEventListener("submit", function(event) 
         document.getElementById("responseMessage").style.display = "block";
     });
 });
-</script>             
-                    </div>
+</script>     </div>
                 </div>
             </div>
         </div>
