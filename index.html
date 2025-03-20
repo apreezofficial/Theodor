@@ -538,43 +538,68 @@
                         <h1 class="text-white mb-4">Order Online</h1>
                         <form>
                             <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="name" placeholder="Your Name">
-                                        <label for="name">Your Name</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="email" class="form-control" id="email" placeholder="Your Email">
-                                        <label for="email">Your Email</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating date" id="date3" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" id="datetime" placeholder="Date & Time" data-target="#date3" data-toggle="datetimepicker" />
-                                        <label for="datetime">Date & Time</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <select class="form-select" id="select1">
-                                          <option value="1">People 1</option>
-                                          <option value="2">People 2</option>
-                                          <option value="3">People 3</option>
-                                        </select>
-                                        <label for="select1">No Of People</label>
-                                      </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Special Request" id="message" style="height: 100px"></textarea>
-                                        <label for="message">Special Request</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Book Now</button>
-                                </div>
+                               <form id="orderForm">
+    <div class="col-12">
+        <div class="form-floating">
+            <select class="form-control" id="quantity" name="quantity">
+                <option value="1">1 Item</option>
+                <option value="2">2 Items</option>
+                <option value="3">3 Items</option>
+            </select>
+            <label for="quantity">Quantity</label>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="form-floating">
+            <select class="form-control" id="product" name="product">
+                <option value="product1">Product 1</option>
+                <option value="product2">Product 2</option>
+                <option value="product3">Product 3</option>
+            </select>
+            <label for="product">Select Product</label>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="form-floating">
+            <textarea class="form-control" placeholder="Order Notes" id="message" name="message" style="height: 100px"></textarea>
+            <label for="message">Order Notes</label>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <button class="btn btn-primary w-100 py-3" type="submit">Place Order</button>
+    </div>
+
+    <!-- Success Message -->
+    <div id="responseMessage" style="display: none; margin-top: 10px;"></div>
+</form>
+
+<script>
+document.getElementById("orderForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent page reload
+
+    // Get form data
+    const formData = new FormData(this);
+
+    // Send data to Getform.io
+    fetch("YOUR_GETFORM_URL_HERE", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json()) // Convert response to JSON
+    .then(data => {
+        document.getElementById("responseMessage").innerHTML = "<p style='color: green;'>Order placed successfully!</p>";
+        document.getElementById("responseMessage").style.display = "block";
+        document.getElementById("orderForm").reset(); // Reset form
+    })
+    .catch(error => {
+        document.getElementById("responseMessage").innerHTML = "<p style='color: red;'>Something went wrong. Please try again.</p>";
+        document.getElementById("responseMessage").style.display = "block";
+    });
+});
+</script>
                             </div>
                         </form>
                     </div>
