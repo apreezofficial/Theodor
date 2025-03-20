@@ -536,7 +536,7 @@
                     <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
                         <h5 class="section-title ff-secondary text-start text-primary fw-normal">Reservation</h5>
                         <h1 class="text-white mb-4">Order Online</h1>
-             <form id="orderForm">
+         <form id="orderForm">
     <div class="row g-3">
         <div class="col-12">
             <div class="form-floating">
@@ -578,33 +578,43 @@
 
 <script>
 document.getElementById("orderForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent page reload
+    event.preventDefault(); // Prevent form reload
 
     const formData = new FormData(this);
 
-    // Add StaticForms.io access key
-    formData.append("accessKey", "5ea91d54-57d8-4fc5-ad26-ff84eaddea33");
-
-    fetch("https://api.staticforms.xyz/submit", {
+    fetch("https://formkeep.com/f/352ec390510e", {
         method: "POST",
-        body: formData
+        body: formData,
+        headers: {
+            "Accept": "application/json"
+        }
     })
-    .then(response => response.text()) // Convert response to text
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Network response was not ok.");
+        }
+        return response.json(); 
+    })
     .then(data => {
-        console.log("StaticForms Response:", data); // Debugging purpose
-        document.getElementById("responseMessage").innerHTML = 
-            "<p style='color: green;'>Order placed successfully!</p>";
-        document.getElementById("responseMessage").style.display = "block";
-        document.getElementById("orderForm").reset();
+        showMessage("Order placed successfully!", "green");
+        document.getElementById("orderForm").reset(); // Reset form
     })
     .catch(error => {
-        console.error("Error:", error);
-        document.getElementById("responseMessage").innerHTML = 
-            "<p style='color: red;'>Something went wrong. Please try again.</p>";
-        document.getElementById("responseMessage").style.display = "block";
+        showMessage("Something went wrong. Please try again.", "red");
     });
 });
-</script></div>
+
+function showMessage(text, color) {
+    const responseMessage = document.getElementById("responseMessage");
+    responseMessage.innerHTML = `<p style='color: ${color};'>${text}</p>`;
+    responseMessage.style.display = "block";
+
+    setTimeout(() => {
+        responseMessage.style.display = "none";
+    }, 3000); // Hide after 3 seconds
+}
+</script>
+                    </div>
                 </div>
             </div>
         </div>
