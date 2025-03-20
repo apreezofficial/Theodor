@@ -537,8 +537,9 @@
                         <h5 class="section-title ff-secondary text-start text-primary fw-normal">Reservation</h5>
                         <h1 class="text-white mb-4">Order Online</h1>
                         
-                            <div class="row g-3">
                                <form id="orderForm">
+                                     <div class="row g-3">
+                          
     <div class="col-12">
         <div class="form-floating">
             <select class="form-control" id="quantity" name="quantity">
@@ -574,7 +575,8 @@
 
     <!-- Success Message -->
     <div id="responseMessage" style="display: none; margin-top: 10px;"></div>
-</form>
+                                     </div>
+                               </form>
 
 <script>
 document.getElementById("orderForm").addEventListener("submit", function(event) {
@@ -600,7 +602,7 @@ document.getElementById("orderForm").addEventListener("submit", function(event) 
     });
 });
 </script>
-                            </div>
+                          
                     </div>
                 </div>
             </div>
