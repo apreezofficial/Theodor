@@ -536,72 +536,77 @@
                     <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
                         <h5 class="section-title ff-secondary text-start text-primary fw-normal">Reservation</h5>
                         <h1 class="text-white mb-4">Order Online</h1>
-                        
-                               <form id="orderForm">
-                                     <div class="row g-3">
-                          
-    <div class="col-12">
-        <div class="form-floating">
-            <select class="form-control" id="quantity" name="quantity">
-                <option value="1">1 Item</option>
-                <option value="2">2 Items</option>
-                <option value="3">3 Items</option>
-            </select>
-            <label for="quantity">Quantity</label>
+               <form id="orderForm">
+    <div class="row g-3">
+        <div class="col-12">
+            <div class="form-floating">
+                <select class="form-control" id="quantity" name="quantity">
+                    <option value="1">1 Item</option>
+                    <option value="2">2 Items</option>
+                    <option value="3">3 Items</option>
+                </select>
+                <label for="quantity">Quantity</label>
+            </div>
         </div>
-    </div>
 
-    <div class="col-12">
-        <div class="form-floating">
-            <select class="form-control" id="product" name="product">
-                <option value="product1">Product 1</option>
-                <option value="product2">Product 2</option>
-                <option value="product3">Product 3</option>
-            </select>
-            <label for="product">Select Product</label>
+        <div class="col-12">
+            <div class="form-floating">
+                <select class="form-control" id="product" name="product">
+                    <option value="product1">Product 1</option>
+                    <option value="product2">Product 2</option>
+                    <option value="product3">Product 3</option>
+                </select>
+                <label for="product">Select Product</label>
+            </div>
         </div>
-    </div>
 
-    <div class="col-12">
-        <div class="form-floating">
-            <textarea class="form-control" placeholder="Order Notes" id="message" name="message" style="height: 100px"></textarea>
-            <label for="message">Order Notes</label>
+        <div class="col-12">
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Order Notes" id="message" name="message" style="height: 100px"></textarea>
+                <label for="message">Order Notes</label>
+            </div>
         </div>
-    </div>
 
-    <div class="col-12">
-        <button class="btn btn-primary w-100 py-3" type="submit">Place Order</button>
-    </div>
+        <div class="col-12">
+            <button class="btn btn-primary w-100 py-3" type="submit">Place Order</button>
+        </div>
 
-    <!-- Success Message -->
-    <div id="responseMessage" style="display: none; margin-top: 10px;"></div>
-                                     </div>
-                               </form>
+        <!-- Success/Error Message -->
+        <div id="responseMessage" style="display: none; margin-top: 10px;"></div>
+    </div>
+</form>
 
 <script>
 document.getElementById("orderForm").addEventListener("submit", function(event) {
     event.preventDefault(); // Prevent page reload
 
-    // Get form data
     const formData = new FormData(this);
 
-    // Send data to Getform.io
     fetch("https://getform.io/f/bdrnqdnb", {
         method: "POST",
         body: formData
     })
-    .then(response => response.json()) // Convert response to JSON
-    .then(data => {
-        document.getElementById("responseMessage").innerHTML = "<p style='color: green;'>Order placed successfully!</p>";
-        document.getElementById("responseMessage").style.display = "block";
+    .then(response => {
+        if (response.ok) {
+            return response.text(); // Get response as text
+        } else {
+            throw new Error("Network response was not ok.");
+        }
+    })
+    .then(() => {
+        const responseMessage = document.getElementById("responseMessage");
+        responseMessage.innerHTML = "<p style='color: green;'>Order placed successfully!</p>";
+        responseMessage.style.display = "block";
         document.getElementById("orderForm").reset(); // Reset form
     })
     .catch(error => {
-        document.getElementById("responseMessage").innerHTML = "<p style='color: red;'>Something went wrong. Please try again.</p>";
-        document.getElementById("responseMessage").style.display = "block";
+        console.error("Error:", error);
+        const responseMessage = document.getElementById("responseMessage");
+        responseMessage.innerHTML = "<p style='color: red;'>Something went wrong. Please try again.</p>";
+        responseMessage.style.display = "block";
     });
 });
-</script>
+                    </script>
                           
                     </div>
                 </div>
